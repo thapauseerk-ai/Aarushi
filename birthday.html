@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!!</title>
+    <title>Happy Birthday Aarushi!!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -40,7 +40,7 @@
             font-weight: 600;
             color: #1e3a5f;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 100;
+            z-index: 1001;
             transition: all 0.2s;
             cursor: pointer;
             font-size: 0.9rem;
@@ -60,7 +60,7 @@
             border-radius: 50px;
             padding: 40px;
             max-width: 550px;
-            width: 100%;
+            width: 90%;
             text-align: center;
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             position: relative;
@@ -72,6 +72,12 @@
             font-size: 3.5rem;
             color: #1e3a5f;
             margin-bottom: 20px;
+        }
+
+        /* Responsive Title */
+        @media (max-width: 576px) {
+            h1 { font-size: 2.5rem; }
+            .card-custom { padding: 30px 20px; border-radius: 35px; }
         }
 
         /* ========== THE LUXURY SHINY CAKE ========== */
@@ -87,12 +93,19 @@
             height: 250px;
         }
 
+        /* Scale down the cake container dynamically on small screens */
+        @media (max-width: 400px) {
+            .cake-container {
+                transform: scale(0.85);
+                margin: 20px 0;
+            }
+        }
+
         .shiny-tier {
             position: absolute;
             box-shadow: inset -15px 0 30px rgba(255,255,255,0.3), inset 10px 0 20px rgba(0,0,0,0.1);
         }
 
-        /* All Tiers are now Golden */
         .tier-bottom {
             bottom: 0;
             width: 240px;
@@ -109,17 +122,14 @@
             height: 95px;
             border-radius: 35px 35px 8px 8px;
             left: 65px;
-            /* Changed to golden gradient */
             background: linear-gradient(135deg, #bf953f, #fcf6ba, #b8860b, #ddac17);
             z-index: 4;
         }
 
-        /* Heavy Sky Blue (Doraemon) Drip styling */
         .drip-line {
             position: absolute;
             top: 0; left: 0; width: 100%;
             z-index: 7;
-            /* Both top lines are now the same blue */
             background: #259ed9; 
             height: 16px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -129,7 +139,6 @@
         .tier-bottom .drip-line { border-radius: 40px 40px 0 0; }
 
         .drip { position: absolute; border-radius: 0 0 15px 15px; z-index: 6; }
-        /* Drips are now heavier (wider) and sky blue for both tiers */
         .drip.heavy-blue { background: #259ed9; width: 20px; box-shadow: -2px 0 3px rgba(0,0,0,0.05); } 
 
         .connector {
@@ -156,7 +165,6 @@
             position: relative;
             width: 12px;
             height: 48px;
-            /* Color changed to Blue and White */
             background: repeating-linear-gradient(
                 45deg,
                 #ffffff,
@@ -189,10 +197,11 @@
         .hint { 
             color: #1e3a5f; 
             font-weight: 600; 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             margin-top: 20px; 
             opacity: 0.8;
             min-height: 1.5em;
+            cursor: pointer;
         }
 
         .love-text {
@@ -259,7 +268,7 @@
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const colors = ['#d4af37', '#ffffff', '#e0f0ff', '#259ed9']; // Confetti matches new cake colors
+    const colors = ['#d4af37', '#ffffff', '#e0f0ff', '#259ed9'];
 
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize);
@@ -297,7 +306,6 @@
     animate();
 
     // ==================== MUSIC SYSTEM ====================
-    // Note: You need a 'birthday-music.mp3' file in the same folder for this to work.
     let bgMusic = null;
     let musicPlaying = false;
     
@@ -325,17 +333,25 @@
     
     // ==================== BLOW CANDLES LOGIC ====================
     let blown = false;
+
+    // Detect if user is on a touch device to update hint text
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const hintElement = document.getElementById('hintText');
     
-    window.addEventListener('keydown', () => {
+    if (isTouchDevice) {
+        hintElement.innerHTML = "Tap anywhere to blow the candles!";
+    }
+
+    function blowCandles(e) {
+        // Prevent triggering music buttons or background events unintentionally
+        if (e.target.id === 'musicToggleBtn') return; 
+        
         if(blown) return;
         blown = true;
         
-        // Final message with updated name
-        document.getElementById('hintText').innerHTML = " <b>Happy birthday, Aaru!</b> 🎂🎉❤️";
-        
+        hintElement.innerHTML = "<b>Happy birthday, Aarushi!</b> 🎂🎉❤️";
         document.querySelectorAll('.candle').forEach(c => c.classList.add('out'));
         
-        // Explode a lot of confetti
         for(let i=0; i<500; i++) particles.push(new Particle());
         
         if (bgMusic && bgMusic.paused) {
@@ -343,18 +359,18 @@
             musicPlaying = true;
             document.getElementById('musicToggleBtn').innerHTML = '🎵 Stop Music';
         }
-    });
+    }
     
-    // Also allow clicking on hint text on mobile
-    document.getElementById('hintText').addEventListener('click', () => {
-        if(window.innerWidth < 768) {
-            window.dispatchEvent(new KeyboardEvent('keydown', {'key': ' '}));
-        }
-    });
-
+    // Keyboard support for Desktops
+    window.addEventListener('keydown', blowCandles);
+    // Touch/Click support for Mobile & Desktops
+    window.addEventListener('touchstart', blowCandles);
+    window.addEventListener('click', blowCandles);
+    
     // ==================== MUSIC TOGGLE BUTTON ====================
     const musicBtn = document.getElementById('musicToggleBtn');
-    musicBtn.addEventListener('click', () => {
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Stops the candle blowing trigger when hitting the music button
         if (!bgMusic) {
             initMusic();
         }
