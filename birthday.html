@@ -92,7 +92,7 @@
             box-shadow: inset -15px 0 30px rgba(255,255,255,0.3), inset 10px 0 20px rgba(0,0,0,0.1);
         }
 
-        /* Tiers with Rounded Top Corners */
+        /* All Tiers are now Golden */
         .tier-bottom {
             bottom: 0;
             width: 240px;
@@ -109,43 +109,39 @@
             height: 95px;
             border-radius: 35px 35px 8px 8px;
             left: 65px;
-            background: linear-gradient(135deg, #4a7ab5, #6a9ad5, #3a6aa5);
+            /* Changed to golden gradient */
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b8860b, #ddac17);
             z-index: 4;
         }
 
-        /* Rounded Drip styling */
+        /* Heavy Sky Blue (Doraemon) Drip styling */
         .drip-line {
             position: absolute;
             top: 0; left: 0; width: 100%;
             z-index: 7;
+            /* Both top lines are now the same blue */
+            background: #259ed9; 
+            height: 16px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .tier-top .drip-line { 
-            background: #d4af37; 
-            height: 14px; 
-            border-radius: 35px 35px 0 0;
-        } 
-        
-        .tier-bottom .drip-line { 
-            background: #4a7ab5; 
-            height: 10px; 
-            border-radius: 40px 40px 0 0;
-        }
+        .tier-top .drip-line { border-radius: 35px 35px 0 0; } 
+        .tier-bottom .drip-line { border-radius: 40px 40px 0 0; }
 
         .drip { position: absolute; border-radius: 0 0 15px 15px; z-index: 6; }
-        .top-gold { background: #d4af37; width: 14px; } 
-        .bot-blue { background: #4a7ab5; width: 12px; }
+        /* Drips are now heavier (wider) and sky blue for both tiers */
+        .drip.heavy-blue { background: #259ed9; width: 20px; box-shadow: -2px 0 3px rgba(0,0,0,0.05); } 
 
         .connector {
             position: absolute;
             top: -12px;
-            width: 8px;
-            background: #4a7ab5;
+            width: 12px;
+            background: #259ed9;
             border-radius: 10px;
             z-index: 5;
         }
 
-        /* ========== WHITE & GOLD CANDLES ========== */
+        /* ========== BLUE & WHITE CANDLES ========== */
         .candles {
             position: absolute;
             bottom: 195px;
@@ -160,12 +156,13 @@
             position: relative;
             width: 12px;
             height: 48px;
+            /* Color changed to Blue and White */
             background: repeating-linear-gradient(
                 45deg,
                 #ffffff,
                 #ffffff 8px,
-                #d4af37 8px,
-                #d4af37 16px
+                #259ed9 8px,
+                #259ed9 16px
             );
             border-radius: 4px;
             box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
@@ -179,6 +176,7 @@
             border-radius: 50% 50% 20% 20%;
             box-shadow: 0 0 15px #ffaa33;
             animation: flicker 0.1s infinite alternate;
+            transition: opacity 0.5s ease;
         }
 
         @keyframes flicker { 
@@ -186,7 +184,7 @@
             100% { transform: translateX(-50%) scale(1.15); } 
         }
         
-        .candle.out .flame { display: none; }
+        .candle.out .flame { opacity: 0; }
 
         .hint { 
             color: #1e3a5f; 
@@ -194,9 +192,9 @@
             font-size: 1rem; 
             margin-top: 20px; 
             opacity: 0.8;
+            min-height: 1.5em;
         }
 
-        /* Made with Love text - centered */
         .love-text {
             margin-top: 25px;
             font-size: 0.9rem;
@@ -210,42 +208,37 @@
 
 <canvas id="confettiCanvas"></canvas>
 
-<!-- Music Control Button -->
 <button class="music-control" id="musicToggleBtn">
     🎵 Stop Music
 </button>
 
 <div class="card-custom">
-    <h1>Happy Birthday, Vivan!🎂❤️</h1>
+    <h1>Happy Birthday, Aarushi!🎂❤️</h1>
     
     <div class="cake-container">
         <div class="cake">
-            <!-- Bottom Tier (Gold) -->
             <div class="shiny-tier tier-bottom">
                 <div class="drip-line"></div>
-                <div class="drip bot-blue" style="left: 0; height: 45px;"></div>
-                <div class="drip bot-blue" style="right: 0; height: 45px;"></div>
-                <div class="drip bot-blue" style="left: 35px; height: 35px;"></div>
-                <div class="drip bot-blue" style="left: 70px; height: 60px;"></div>
-                <div class="drip bot-blue" style="left: 105px; height: 30px;"></div>
-                <div class="drip bot-blue" style="left: 140px; height: 65px;"></div>
-                <div class="drip bot-blue" style="left: 175px; height: 40px;"></div>
-                <div class="drip bot-blue" style="left: 205px; height: 50px;"></div>
+                <div class="drip heavy-blue" style="left: -5px; height: 50px; width: 25px;"></div>
+                <div class="drip heavy-blue" style="right: -5px; height: 50px; width: 25px;"></div>
+                <div class="drip heavy-blue" style="left: 35px; height: 35px;"></div>
+                <div class="drip heavy-blue" style="left: 75px; height: 65px;"></div>
+                <div class="drip heavy-blue" style="left: 115px; height: 35px;"></div>
+                <div class="drip heavy-blue" style="left: 155px; height: 70px;"></div>
+                <div class="drip heavy-blue" style="left: 195px; height: 45px;"></div>
                 
                 <div class="connector" style="left: 45px; height: 22px;"></div>
                 <div class="connector" style="right: 45px; height: 28px;"></div>
             </div>
 
-            <!-- Top Tier (Blue) -->
             <div class="shiny-tier tier-top">
                 <div class="drip-line"></div>
-                <div class="drip top-gold" style="left: 0; height: 38px;"></div>
-                <div class="drip top-gold" style="right: 0; height: 38px;"></div>
-                <div class="drip top-gold" style="left: 30px; height: 48px;"></div>
-                <div class="top-gold drip" style="left: 60px; height: 28px;"></div>
-                <div class="top-gold drip" style="left: 85px; height: 75px;"></div>
-                <div class="top-gold drip" style="left: 110px; height: 28px;"></div>
-                <div class="top-gold drip" style="left: 135px; height: 48px;"></div>
+                <div class="drip heavy-blue" style="left: -5px; height: 40px; width: 22px;"></div>
+                <div class="drip heavy-blue" style="right: -5px; height: 40px; width: 22px;"></div>
+                <div class="drip heavy-blue" style="left: 30px; height: 50px;"></div>
+                <div class="heavy-blue drip" style="left: 65px; height: 30px;"></div>
+                <div class="heavy-blue drip" style="left: 95px; height: 80px;"></div>
+                <div class="heavy-blue drip" style="left: 130px; height: 50px;"></div>
             </div>
 
             <div class="candles" id="candlesContainer">
@@ -258,7 +251,6 @@
 
     <div class="hint" id="hintText">Press any key to blow the candles!</div>
 
-    <!-- Made with Love text (replacing gift icon) -->
     <div class="love-text">✨ Made with Love ✨</div>
 </div>
 
@@ -267,7 +259,7 @@
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const colors = ['#d4af37', '#ffffff', '#e0f0ff', '#4a7ab5'];
+    const colors = ['#d4af37', '#ffffff', '#e0f0ff', '#259ed9']; // Confetti matches new cake colors
 
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize);
@@ -305,6 +297,7 @@
     animate();
 
     // ==================== MUSIC SYSTEM ====================
+    // Note: You need a 'birthday-music.mp3' file in the same folder for this to work.
     let bgMusic = null;
     let musicPlaying = false;
     
@@ -322,7 +315,7 @@
                 musicPlaying = true;
                 document.getElementById('musicToggleBtn').innerHTML = '🎵 Stop Music';
             }).catch(e => {
-                console.log('Autoplay blocked. Click anywhere or press a key to start music.');
+                console.log('Autoplay blocked.');
                 document.getElementById('musicToggleBtn').innerHTML = '🎵 Play Music';
             });
         }
@@ -336,11 +329,13 @@
     window.addEventListener('keydown', () => {
         if(blown) return;
         blown = true;
-        document.getElementById('hintText').innerHTML = " <b>Happy birthday, pookiee!</b> 🎂🎉❤️";
         
-        document.querySelectorAll('.flame').forEach(f => f.style.opacity = '0');
+        // Final message with updated name
+        document.getElementById('hintText').innerHTML = " <b>Happy birthday, Aaru!</b> 🎂🎉❤️";
+        
         document.querySelectorAll('.candle').forEach(c => c.classList.add('out'));
         
+        // Explode a lot of confetti
         for(let i=0; i<500; i++) particles.push(new Particle());
         
         if (bgMusic && bgMusic.paused) {
@@ -350,6 +345,13 @@
         }
     });
     
+    // Also allow clicking on hint text on mobile
+    document.getElementById('hintText').addEventListener('click', () => {
+        if(window.innerWidth < 768) {
+            window.dispatchEvent(new KeyboardEvent('keydown', {'key': ' '}));
+        }
+    });
+
     // ==================== MUSIC TOGGLE BUTTON ====================
     const musicBtn = document.getElementById('musicToggleBtn');
     musicBtn.addEventListener('click', () => {
